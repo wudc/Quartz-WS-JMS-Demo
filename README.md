@@ -1,5 +1,5 @@
 # Quartz-WS-JMS-Demo
-Quartz, Web Service, and JMS Demo Using a Simple Payment Service
+Spring boot, Postgres, Quartz, Web Service, and JMS Demo Using a Simple Payment Service
 A simple demo project designed for doing the following:
 1) Spring boot applcation
 2) Integrated with the Quartz library to schedule the payment submit jobs scheduled for every 5 seconds
