@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="https://www.cjet.com/xml/payment">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:getPaymentRequest>
+            <gs:amount>5000.0</gs:amount>
+            <gs:status>Submitted</gs:status>
+            <gs:method>Cash</gs:method>       
+        </gs:getPaymentRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
