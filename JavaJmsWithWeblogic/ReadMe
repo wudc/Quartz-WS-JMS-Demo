@@ -1,0 +1,1 @@
+A simple Java JMS project with a sender and receiver. The target JMS queue is the Weblogic queue.
