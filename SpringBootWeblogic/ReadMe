@@ -1,0 +1,19 @@
+Spring Boot War Project with Weblogic 12.1.3
+Download Oracle WebLogic Server 12.1.3 For Windows 10
+Zip distribution with Oracle WebLogic Server only and intended for WebLogic Server development only.
+This update of the zip distribution contains recommended fixes - see readme for details.
+Zip distribution Update 3 for Mac OSX, Windows, and Linux(190 MB)
+Install Weblogic 12.1.3
+
+Setup Weblogic Server in Eclipse
+Setup domain (app server)
+
+Add src\main\webapp\WEB-INF folder
+dispatcherServlet-servlet.xml
+weblogic.xml
+
+mvn clean package
+
+Manually deploy war file into Weblogic 12.1.3
+
+http://localhost:7001/spring-boot-2x-weblogic
