@@ -1,1 +1,27 @@
 A simple Java JMS project with a sender and receiver. The target JMS queue is the Weblogic queue.
+
+To Test Weblogic JMS using jMeter
+Preconditions:
+1) Configure Weblogic JMS factory and queue
+2) Run the queue receiver app to wait for message
+
+In jMeter
+1) Add the wlthint3client jar to the jMeter lib folder (if you have a local weblogic server install. The jar file is located at /wlserver/server/lib
+2) Open jMeter and create a Thread Group and configure the threads
+3) From the thread group, select sampler->JMS publisher to post a message to the queue
+4) Setup the publisher properties:
+a) Initial Context Factory=weblogic.jndi.WLInitialContextFactory
+b) Provider URL=t3://localhost:7001
+c) Connection Factory=jms/MyJMSConnectionFactory
+d) Destination=jms/MyJMSQueue
+5) Type a message in the TextMessage window
+6) Click the Green Start button
+7) Observe the queue receiver console to verify message received
+
+To Setup Thread Group and read random data files
+1) few text files with a message. Save them as .txt files
+2) From the Thread Group section, select Number of Threads (users) to 5 or more
+3) From the JMS publiser, click Random File from Folder specified below radio button
+4) Enter the folder when the data files are via the Path of folder containing random files suffixed with .dat for bytes messages, .txt or .obj for 
+text and Object messages
+5) Be sure to select the right Content encoding. For example US-ASCII for text messages
