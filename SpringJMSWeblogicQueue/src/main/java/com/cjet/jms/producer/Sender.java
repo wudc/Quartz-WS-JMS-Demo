@@ -17,4 +17,11 @@ public class Sender {
 		LOGGER.info("sending message='{}'", message);
 		jmsTemplate.convertAndSend(QueueProperties.QUEUE, message);
 	}
+	
+	public void sendXMLFile(String message) {
+		jmsTemplate.convertAndSend("jms/MyJMSQueue", message, m -> {
+			m.setJMSType("CREATE_TEXT");
+			return m;
+		});
+	}
 }

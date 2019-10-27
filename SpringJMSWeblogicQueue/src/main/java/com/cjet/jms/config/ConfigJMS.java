@@ -1,14 +1,19 @@
 package com.cjet.jms.config;
 
 import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.support.destination.JndiDestinationResolver;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.jndi.JndiTemplate;
 
+import com.cjet.jms.consumer.QueueConsumer;
 import com.cjet.jms.producer.Sender;
 
 /**
@@ -23,10 +28,20 @@ import com.cjet.jms.producer.Sender;
  *
  */
 @Configuration
+@EnableJms
 public class ConfigJMS {
+	
+	private final JmsServiceConfig config;
+	
+	@Autowired
+	public ConfigJMS(JmsServiceConfig config) {
+		this.config = config;
+	}
 	
 	@Bean
     public JndiTemplate jndiTemplate() {
+		JndiTemplate jndiTemplate = new JndiTemplate();
+		jndiTemplate.setEnvironment(config.getJndiProperties());
         return new JndiTemplate();
     }
      
@@ -34,7 +49,7 @@ public class ConfigJMS {
     public JndiObjectFactoryBean queueConnectionFactory() {
         JndiObjectFactoryBean queueConnectionFactory = new JndiObjectFactoryBean();
         queueConnectionFactory.setJndiTemplate(jndiTemplate());
-        queueConnectionFactory.setJndiName("jms/MyJMSConnectionFactory");
+        queueConnectionFactory.setJndiName(config.getConnectionFactoryName());
         return queueConnectionFactory;
     }
      
@@ -59,12 +74,27 @@ public class ConfigJMS {
     public JndiObjectFactoryBean jmsQueue() {
         JndiObjectFactoryBean jmsQueue = new JndiObjectFactoryBean();
         jmsQueue.setJndiTemplate(jndiTemplate());
-        jmsQueue.setJndiName("jms/MyJMSQueue");
+        jmsQueue.setJndiName(config.getQueueName());
          
         return jmsQueue;
     }
 	@Bean
 	public Sender sender() {
 		return new Sender();
+	}
+	
+	@Bean
+	public QueueConsumer queueListener() {
+		return new QueueConsumer();
+	}
+	
+	@Bean
+	public DefaultMessageListenerContainer messageListener() {
+		DefaultMessageListenerContainer listener = new DefaultMessageListenerContainer();
+		listener.setConcurrentConsumers(5);
+		listener.setConnectionFactory((ConnectionFactory)queueConnectionFactory().getObject());
+		listener.setDestination((Destination)jmsQueue().getObject());
+		listener.setMessageListener(queueListener());
+		return listener;
 	}
 }
