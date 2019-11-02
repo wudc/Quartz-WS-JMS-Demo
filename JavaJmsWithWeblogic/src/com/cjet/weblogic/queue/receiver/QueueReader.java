@@ -26,10 +26,20 @@ public class QueueReader implements MessageListener {
 	private Queue queue;
 	private boolean quit;
 	
+	/**
+	 * Session.CLIENT_ACKNOWLEDGE allows the JMS queue server not to dequeue message and try redeliver
+	 * at a configured interval.
+	 * 
+	 * @param context
+	 * @param queueName
+	 * @throws NamingException
+	 * @throws JMSException
+	 */
 	public void init(Context context, String queueName) throws NamingException, JMSException {
 		queueConnectionFactory =(QueueConnectionFactory)context.lookup(QueueProperties.JMS_QUEUE_FACTORY);
 		queueConnection = queueConnectionFactory.createQueueConnection();
-		queueSession = queueConnection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+		//queueSession = queueConnection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+		queueSession = queueConnection.createQueueSession(false, Session.CLIENT_ACKNOWLEDGE);
 		queue = (Queue)context.lookup(queueName);
 		queueReceiver = queueSession.createReceiver(queue);
 		queueReceiver.setMessageListener(this);
@@ -71,6 +81,9 @@ public class QueueReader implements MessageListener {
 			String msgText;
 			if (msg instanceof TextMessage) {
 				msgText = ((TextMessage)msg).getText();
+				//raise error for jms server error handling scenario
+				//raise exception skip the message acknowledge to jms server
+				//throw new JMSException("TextMesasge Error......");
 			}
 			else {
 				msgText = msg.toString();
@@ -84,8 +97,13 @@ public class QueueReader implements MessageListener {
 					this.notifyAll(); //notify main thread to quit
 				}
 			}
+			
+			//delay acknowledge for testing
+			Thread.sleep(25000);
+			System.out.println("Message msg.acknowledge() sent.");
+			msg.acknowledge();
 		}
-		catch (JMSException jmsException) {
+		catch (JMSException | InterruptedException jmsException) {
 			System.err.println("Exception: " + jmsException.getMessage());
 		}
 	}
