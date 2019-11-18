@@ -1,0 +1,4 @@
+2019-11-16T11:23:06.740-0500 INFO %%%%% Logging from the DemoApp %%%%%%%
+2019-11-16T11:23:06.740-0500 TRACE COM :: cjet :: demo :: LEVEL :: DemoApp TRACE Message ::
+2019-11-16T11:23:06.740-0500 INFO COM :: cjet :: demo :: LEVEL :: DemoApp INFO Message ::
+2019-11-16T11:23:06.740-0500 DEBUG COM :: cjet :: demo :: LEVEL :: DemoApp DEBUG Message ::

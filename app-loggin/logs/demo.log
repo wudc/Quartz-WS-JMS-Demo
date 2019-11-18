@@ -1,0 +1,13 @@
+[2019-11-16T11:23:06.010-0500 [main] [INFO  ] [com.cjet.demo.AppLogginApplication] [logStarting@Line50] Starting AppLogginApplication on DESKTOP-6VD7C9P with PID 18220 (D:\projects\quartz\Quartz-WS-JMS-Demo\app-loggin\target\classes started by wudc in D:\projects\quartz\Quartz-WS-JMS-Demo\app-loggin)
+[2019-11-16T11:23:06.014-0500 [main] [DEBUG ] [com.cjet.demo.AppLogginApplication] [logStarting@Line53] Running with Spring Boot v2.1.8.RELEASE, Spring v5.1.9.RELEASE
+[2019-11-16T11:23:06.014-0500 [main] [INFO  ] [com.cjet.demo.AppLogginApplication] [logStartupProfileInfo@Line648] No active profile set, falling back to default profiles: default
+[2019-11-16T11:23:06.738-0500 [main] [INFO  ] [com.cjet.demo.AppLogginApplication] [logStarted@Line59] Started AppLogginApplication in 0.876 seconds (JVM running for 1.627)
+[2019-11-16T11:23:06.739-0500 [main] [INFO  ] [com.cjet.demo.AppLogginApplication] [main@Line17] %%%%% Logging from the AppLogginApplication %%%%%%%
+[2019-11-16T11:23:06.739-0500 [main] [INFO  ] [com.cjet.demo.AppLogginApplication] [main@Line18] Info level log message
+[2019-11-16T11:23:06.739-0500 [main] [DEBUG ] [com.cjet.demo.AppLogginApplication] [main@Line19] Debug level log message
+[2019-11-16T11:23:06.739-0500 [main] [TRACE ] [com.cjet.demo.AppLogginApplication] [main@Line22] A TRACE Message
+[2019-11-16T11:23:06.739-0500 [main] [TRACE ] [com.cjet.demo.AppLogginApplication] [main@Line28] [Ljava.lang.StackTraceElement;@652ab8d9
+[2019-11-16T11:23:06.740-0500 [main] [INFO  ] [com.cjet.demo.app.DemoApp] [<init>@Line9] %%%%% Logging from the DemoApp %%%%%%%
+[2019-11-16T11:23:06.740-0500 [main] [TRACE ] [com.cjet.demo.app.DemoApp] [<init>@Line11] COM :: cjet :: demo :: LEVEL :: DemoApp TRACE Message ::
+[2019-11-16T11:23:06.740-0500 [main] [INFO  ] [com.cjet.demo.app.DemoApp] [<init>@Line12] COM :: cjet :: demo :: LEVEL :: DemoApp INFO Message ::
+[2019-11-16T11:23:06.740-0500 [main] [DEBUG ] [com.cjet.demo.app.DemoApp] [<init>@Line13] COM :: cjet :: demo :: LEVEL :: DemoApp DEBUG Message ::
