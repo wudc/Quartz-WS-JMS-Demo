@@ -65,10 +65,19 @@ public class QueuePoster {
 		bufferedReader.close();
 	}
 	
+	private static void autoSend(QueuePoster queuePoster) throws IOException, JMSException, InterruptedException {
+		while(true) {
+			queuePoster.post("Greeting David Wu. From Spring Boot to Weblogic JMS Queue. The time is: " + new java.util.Date());
+			Thread.sleep(20000);
+		}
+	}	
+	
 	private static InitialContext getInitialContext() throws NamingException {
 		Hashtable<String,String> env = new Hashtable<String,String>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY, QueueProperties.JNDI_FACTORY);
 		env.put(Context.PROVIDER_URL, QueueProperties.SERVER);
+		env.put(Context.SECURITY_PRINCIPAL, "myqueueuser");
+		env.put(Context.SECURITY_CREDENTIALS, "myqueueuser1");		
 		return new InitialContext(env);
 	}
 	
@@ -76,7 +85,8 @@ public class QueuePoster {
 		InitialContext initialContext = getInitialContext();
 		QueuePoster queuePoster = new QueuePoster();
 		queuePoster.init(initialContext, QueueProperties.QUEUE);
-		sendToServer(queuePoster);
+		//sendToServer(queuePoster);
+		autoSend(queuePoster);
 		queuePoster.close();
 	}
 }
